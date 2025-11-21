@@ -6,7 +6,7 @@ const ReviewDetails = () => {
   const [detailReview, setDetailReview] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/reviewDetails/${id}`)
+    fetch(`https://assignment-10-server-side-beta.vercel.app/reviewDetails/${id}`)
       .then((res) => res.json())
       .then((data) => setDetailReview(data));
   }, [id]);

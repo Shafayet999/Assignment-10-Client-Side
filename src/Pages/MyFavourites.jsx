@@ -9,7 +9,7 @@ const MyFavourites = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        fetch(`http://localhost:3000/myFavorites/${user.email}`)
+        fetch(`https://assignment-10-server-side-beta.vercel.app/myFavorites/${user.email}`)
             .then((res) => res.json())
             .then((data) => setFavs(data))
             .catch((err) => console.log(err));

@@ -10,7 +10,7 @@ const ReviewCard = ({ i }) => {
     useEffect(() => {
         if (!user) return;
 
-        fetch(`http://localhost:3000/myFavorites/${user.email}/${i._id}`)
+        fetch(`https://assignment-10-server-side-beta.vercel.app/myFavorites/${user.email}/${i._id}`)
             .then(res => res.json())
             .then(data => setFav(data.isFav));
     }, [user, i._id]);
@@ -35,7 +35,7 @@ const ReviewCard = ({ i }) => {
         };
 
         if (fav) {
-            fetch(`http://localhost:3000/removeFavorite/${user.email}/${i._id}`, {
+            fetch(`https://assignment-10-server-side-beta.vercel.app/removeFavorite/${user.email}/${i._id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())
@@ -47,7 +47,7 @@ const ReviewCard = ({ i }) => {
 
         // Not favorite → add
         else {
-            fetch("http://localhost:3000/addFavorite", {
+            fetch("https://assignment-10-server-side-beta.vercel.app/addFavorite", {
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(favData),

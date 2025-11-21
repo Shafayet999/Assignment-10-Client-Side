@@ -15,7 +15,7 @@ const MyReviews = () => {
 
         setReviewsLoading(true);
 
-        fetch(`http://localhost:3000/reviewsByEmail?email=${user.email}`)
+        fetch(`https://assignment-10-server-side-beta.vercel.app/reviewsByEmail?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setReviews(data);
@@ -39,7 +39,7 @@ const MyReviews = () => {
         }).then((result) => {
             if (!result.isConfirmed) return;
 
-            fetch(`http://localhost:3000/deleteReview/${id}`, {
+            fetch(`https://assignment-10-server-side-beta.vercel.app/deleteReview/${id}`, {
                 method: "DELETE",
             })
                 .then((res) => res.json())

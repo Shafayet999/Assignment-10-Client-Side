@@ -15,7 +15,7 @@ const AllReviews = () => {
     useEffect(() => {
         setReviewLoading(true);
 
-        fetch("http://localhost:3000/allReviews")
+        fetch("https://assignment-10-server-side-beta.vercel.app/allReviews")
             .then(res => res.json())
             .then(data => {
                 setAllReviews(data);
@@ -31,14 +31,14 @@ const AllReviews = () => {
     useEffect(() => {
         // If search box is empty → reload all reviews
         if (searchText.trim() === "") {
-            fetch("http://localhost:3000/allReviews")
+            fetch("https://assignment-10-server-side-beta.vercel.app/allReviews")
                 .then(res => res.json())
                 .then(data => setAllReviews(data));
             return;
         }
 
         // Searching
-        fetch(`http://localhost:3000/search?text=${searchText}`)
+        fetch(`https://assignment-10-server-side-beta.vercel.app/search?text=${searchText}`)
             .then(res => res.json())
             .then(data => setAllReviews(data));
 

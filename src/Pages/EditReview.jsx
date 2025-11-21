@@ -10,7 +10,7 @@ const EditReview = () => {
 
     // Load review data
     useEffect(() => {
-        fetch(`http://localhost:3000/reviewDetails/${id}`)
+        fetch(`https://assignment-10-server-side-beta.vercel.app/reviewDetails/${id}`)
             .then((res) => res.json())
             .then((data) => setFormData(data))
             .catch((err) => console.log(err));
@@ -35,7 +35,7 @@ const EditReview = () => {
             date: new Date(),
         };
 
-        fetch(`http://localhost:3000/updateReview/${id}`, {
+        fetch(`https://assignment-10-server-side-beta.vercel.app/updateReview/${id}`, {
             method: "PUT",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(updatedReview),

@@ -31,9 +31,9 @@ const Home = () => {
             img: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=677&auto=format&fit=crop",
         },
     ];
-
+// https://assignment-10-server-side-beta.vercel.app/
     useEffect(() => {
-        fetch("http://localhost:3000/topReviews")
+        fetch("https://assignment-10-server-side-beta.vercel.app/topReviews")
             .then((res) => res.json())
             .then((data) => setReviews(data))
             .catch((err) => console.log(err));

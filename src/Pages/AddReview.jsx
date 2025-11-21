@@ -10,7 +10,7 @@ const AddReview = () => {
 
 
     // useEffect(() => {
-    //     fetch("http://localhost:3000/allReviews")
+    //     fetch("https://assignment-10-server-side-beta.vercel.app/allReviews")
     //         .then(res => res.json())
     //         .then(data => setReviews(data))
     //         .catch(err => console.log(err));
@@ -33,7 +33,7 @@ const AddReview = () => {
             date: new Date(),
         };
         console.log(newReview);
-        fetch("http://localhost:3000/allReviews", {
+        fetch("https://assignment-10-server-side-beta.vercel.app/allReviews", {
             method: 'POST',
             headers: { "content-type": "application/json" },
             body: JSON.stringify(newReview)
