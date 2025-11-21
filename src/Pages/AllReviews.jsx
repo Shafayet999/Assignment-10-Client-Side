@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react';
 import ReviewCard from '../Components/ReviewCard';
 import { AuthContext } from '../ContextProviders/AuthContext';
 import Loading from '../Components/Loading';
+import ErrorPage from './ErrorPage';
 
 const AllReviews = () => {
 
@@ -33,7 +34,9 @@ const AllReviews = () => {
 
     }, [searchText]);
 
-    if (loading || allReviews.length === 0) {
+
+
+    if (loading || allReviews.length === null) {
         return <Loading />;
     }
 
@@ -50,6 +53,13 @@ const AllReviews = () => {
                     onChange={(e) => setSearchText(e.target.value)}
                 />
             </div>
+
+            {/* No result */}
+            {allReviews.length === 0 && (
+                <p className="text-center text-xl text-orange-500 font-semibold mt-10">
+                    ❌ No reviews found
+                </p>
+            )}
 
             <div className='grid grid-cols-3 mx-auto mt-10 gap-10 max-w-7xl'>
                 {allReviews.map(i => <ReviewCard key={i._id} i={i}></ReviewCard>)}
