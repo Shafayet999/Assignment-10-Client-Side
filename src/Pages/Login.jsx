@@ -1,23 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router";
-import { useContext} from 'react';
+import { useContext } from 'react';
 import { AuthContext } from "../ContextProviders/AuthContext";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from 'react-icons/io5';
 
 const Login = () => {
- 
-    const {signInWithGoogleFunc, setUser, user, loading, setLoading} = useContext(AuthContext);
+
+    const { signInWithGoogleFunc, setUser, user, signInWithEmailAndPasswordFunc, loading, setLoading } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const [loginEmail, setLoginEmail] = useState('');
+    const [show, setShow] = useState(false);
+
 
     // if (user) {
     //     navigate(location?.state || '/');
     //     return; 
     // }
+    
+
+    const handleSignin = (event) => {
+        event.preventDefault();
+        const email = event.target.email?.value;
+        const password = event.target.password?.value;
+        signInWithEmailAndPasswordFunc(email, password)
+            .then((res) => {
+
+                setLoading(false);
+
+
+                setUser(res.user);
+
+                event.target.reset();
+                navigate(location?.state || '/');
+
+            })
+            .catch((e) => {
+
+                event.target.reset();
+                // toast.error(e.message);
+            });
+    };
 
     const handleGoogleSignin = () => {
-
-
         signInWithGoogleFunc()
             .then((res) => {
 
@@ -30,16 +57,18 @@ const Login = () => {
                 // toast.error(e.message);
             });
     };
+
+
     console.log(user);
     return (
         <div className='flex justify-center items-center flex-col  space-y-10 mx-auto'>
-            
+
 
             <div className="card w-full max-w-sm shrink-0 shadow-2xl p-5 mt-10">
                 <h1 className='font-semibold text-4xl orrange text-center'>LogIn Here</h1>
                 <div className="card-body">
                     <form
-                    // onSubmit={handleSignin}
+                        onSubmit={handleSignin}
                     >
                         <fieldset className="fieldset">
                             {/* email */}
@@ -49,8 +78,8 @@ const Login = () => {
                                 type="email"
                                 className="input orrange"
                                 placeholder="Email"
-                            // value={loginEmail}
-                            // onChange={(e) => setLoginEmail(e.target.value)}
+                                value={loginEmail}
+                                onChange={(e) => setLoginEmail(e.target.value)}
                             />
 
 
@@ -60,15 +89,15 @@ const Login = () => {
                                 {/* password */}
                                 <label className="label orrange">Password</label>
                                 <input name='password'
-                                    // type={show ? "text" : "password"}
+                                    type={show ? "text" : "password"}
 
                                     className="input orrange" placeholder="Password" />
-                                {/* <span
+                                <span
                                     onClick={() => setShow(!show)}
                                     className="absolute right-8 top-8 cursor-pointer z-50"
                                 >
-                                    {show ? <FaEye /> : <IoEyeOff />}
-                                </span> */}
+                                    {show ? <FaEye className="orrange" /> : <IoEyeOff className="orrange" />}
+                                </span>
                             </div>
 
 

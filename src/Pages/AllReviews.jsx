@@ -6,16 +6,24 @@ import ErrorPage from './ErrorPage';
 
 const AllReviews = () => {
 
-    const { loading } = use(AuthContext);
+    const { loading, setLoading } = use(AuthContext);
 
     const [allReviews, setAllReviews] = useState([]);
     const [searchText, setSearchText] = useState("");
+    // const [searchLoading, setSearchLoading] = useState(true);
+    const [reviewLoading, setReviewLoading] = useState(true);
 
     // Load all reviews initially
+
     useEffect(() => {
+
+
         fetch("http://localhost:3000/allReviews")
             .then(res => res.json())
-            .then(data => setAllReviews(data))
+            .then(data => {
+                setAllReviews(data);
+                setReviewLoading(false);
+            })
             .catch(err => console.log(err));
     }, []);
 
@@ -30,18 +38,18 @@ const AllReviews = () => {
 
         fetch(`http://localhost:3000/search?text=${searchText}`)
             .then(res => res.json())
-            .then(data => setAllReviews(data));
+            .then(data => { setAllReviews(data) });
 
     }, [searchText]);
 
+    // setLoading(true);
 
+    console.log(allReviews.length);
 
-    if (loading || allReviews.length === null) {
-        return <Loading />;
-    }
+    if (loading || reviewLoading) return <Loading />;
 
     return (
-        
+
         <div>
             <h1 className='text-center mt-10 font-semibold text-3xl orrange'>All Reviews</h1>
 

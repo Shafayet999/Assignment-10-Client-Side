@@ -4,6 +4,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import { AuthContext } from '../ContextProviders/AuthContext';
 import Loading from '../Components/Loading';
+import { ToastContainer } from 'react-toastify';
 
 const MainLayout = () => {
     const { loading } = use(AuthContext);
@@ -12,7 +13,7 @@ const MainLayout = () => {
         <div className='flex flex-col min-h-screen'>
             <Navbar></Navbar>
             <div className='flex-1'>
-                {/* <ToastContainer position="top-right" autoClose={1500} /> */}
+                <ToastContainer position="top-right" autoClose={1500} />
                 <Outlet></Outlet>
             </div>
             <Footer></Footer>
