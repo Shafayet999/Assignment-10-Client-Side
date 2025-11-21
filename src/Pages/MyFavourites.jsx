@@ -15,7 +15,7 @@ const MyFavourites = () => {
             .catch((err) => console.log(err));
     }, [user?.email]);
 
-    if (loading || favs.length === 0) {
+    if (loading) {
         return <Loading />;
     }
     return (
@@ -26,7 +26,7 @@ const MyFavourites = () => {
 
             {favs.length === 0 ? (
                 <p className="text-center text-gray-600 text-lg">
-                    You haven't added any favorites yet 😢
+                    You haven't added any favorites yet
                 </p>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

@@ -7,83 +7,82 @@ import { useNavigate } from "react-router";
 const MyReviews = () => {
     const { user, loading } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
-    const navigate = useNavigate();
-
     const [reviewsLoading, setReviewsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!user?.email) return;
 
+        setReviewsLoading(true);
+
         fetch(`http://localhost:3000/reviewsByEmail?email=${user.email}`)
             .then((res) => res.json())
-            .then((data) => {setReviews(data), setReviewsLoading(false);})
+            .then((data) => {
+                setReviews(data);
+                setReviewsLoading(false);
+            })
             .catch((err) => {
-            console.log(err);
-            setReviewsLoading(false);
-        });
+                console.log(err);
+                setReviewsLoading(false);
+            });
     }, [user?.email]);
 
     const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "This action cannot be undone!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, delete it",
         }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`http://localhost:3000/deleteReview/${id}`, {
-                    method: "DELETE",
-                })
-                    .then((res) => res.json())
-                    .then(() => {
-                        const updated = reviews.filter((r) => r._id !== id);
-                        setReviews(updated);
+            if (!result.isConfirmed) return;
 
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your review has been deleted.",
-                            icon: "success",
-                            timer: 1200,
-                            showConfirmButton: false,
-                        });
+            fetch(`http://localhost:3000/deleteReview/${id}`, {
+                method: "DELETE",
+            })
+                .then((res) => res.json())
+                .then(() => {
+                    const updated = reviews.filter((r) => r._id !== id);
+                    setReviews(updated);
 
-                       
-                        if (updated.length === 0) {
-                            setTimeout(() => navigate("/"), 1200);
-                        }
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your review has been removed.",
+                        icon: "success",
+                        timer: 1300,
+                        showConfirmButton: false,
                     });
-            }
+
+                    if (updated.length === 0) {
+                        setTimeout(() => navigate("/"), 1300);
+                    }
+                });
         });
     };
 
-    if (loading || reviewsLoading) {
-        return <Loading />;
-    }
+    if (loading || reviewsLoading) return <Loading />;
 
     return (
-        <div className="max-w-7xl mx-auto px-6 py-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-10">
             <h1 className="text-3xl font-semibold orrange text-center mb-10">
-                My Reviews({reviews.length})
+                My Reviews ({reviews.length})
             </h1>
 
-            {reviews.length === 0 && (
+            {reviews.length === 0 ? (
                 <p className="text-center text-gray-500 text-xl">
                     You haven't added any reviews yet.
                 </p>
-            )}
-
-            {reviews.length > 0 && (
-                <div className="overflow-x-auto shadow-lg rounded-xl bg-white">
+            ) : (
+                <div className="overflow-x-auto rounded-xl shadow-lg bg-white">
                     <table className="table w-full">
                         <thead className="bg-orange-100 text-orange-700 text-lg">
                             <tr>
                                 <th>Photo</th>
                                 <th>Food Name</th>
                                 <th>Restaurant</th>
-                                <th>Posted Date</th>
+                                <th>Date</th>
                                 <th>Review</th>
                                 <th className="text-center">Actions</th>
                             </tr>
@@ -95,7 +94,6 @@ const MyReviews = () => {
                                     key={review._id}
                                     className="hover:bg-orange-50 transition-all"
                                 >
-
                                     <td>
                                         <img
                                             src={review.photo}
@@ -104,15 +102,17 @@ const MyReviews = () => {
                                         />
                                     </td>
 
-
-                                    <td className="font-semibold">{review.foodName}</td>
-
+                                    <td className="font-semibold">
+                                        {review.foodName}
+                                    </td>
 
                                     <td>{review.restaurantName}</td>
 
-                                    {/* Date */}
-                                    <td>{new Date(review.date).toLocaleDateString("en-GB")}</td>
-
+                                    <td>
+                                        {review.date
+                                            ? new Date(review.date).toLocaleDateString("en-GB")
+                                            : "N/A"}
+                                    </td>
 
                                     <td className="max-w-xs">
                                         <p className="text-gray-600">
@@ -122,14 +122,11 @@ const MyReviews = () => {
                                         </p>
                                     </td>
 
-
                                     <td>
-                                        <div className="flex items-center gap-3 justify-center h-full">
+                                        <div className="flex items-center gap-3 justify-center">
                                             <button
                                                 className="btn btn-sm bg-orrange text-white border-none"
-                                                onClick={() =>
-                                                    (window.location.href = `/editReview/${review._id}`)
-                                                }
+                                                onClick={() => navigate(`/editReview/${review._id}`)}
                                             >
                                                 Edit
                                             </button>
@@ -148,7 +145,6 @@ const MyReviews = () => {
                     </table>
                 </div>
             )}
-
         </div>
     );
 };

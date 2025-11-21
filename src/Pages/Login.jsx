@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { AuthContext } from "../ContextProviders/AuthContext";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from 'react-icons/io5';
+import { toast } from "react-toastify";
 
 const Login = () => {
 
@@ -40,7 +41,7 @@ const Login = () => {
             .catch((e) => {
 
                 event.target.reset();
-                // toast.error(e.message);
+                toast.error(e.message);
             });
     };
 
@@ -48,18 +49,16 @@ const Login = () => {
         signInWithGoogleFunc()
             .then((res) => {
 
-                setLoading(false);
+                
                 setUser(res.user);
                 navigate(location?.state || '/');
-                // toast.success("Signin successful");
+                toast.success("Signin successful");
             })
             .catch((e) => {
-                // toast.error(e.message);
+                toast.error(e.message);
             });
     };
-
-
-    console.log(user);
+  
     return (
         <div className='flex justify-center items-center flex-col  space-y-10 mx-auto'>
 
