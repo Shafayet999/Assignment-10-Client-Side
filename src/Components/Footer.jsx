@@ -4,7 +4,7 @@ import logo from "/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 mt-14 border-t border-gray-300">
+    <footer className="bg-orange-100 mt-14 border-t border-white">
       {/* CONTENT GRID */}
       <div className="max-w-7xl mx-auto px-6 py-10 grid gap-10 md:grid-cols-3">
 
@@ -54,7 +54,7 @@ const Footer = () => {
       </div>
 
       
-      <div className="text-center py-4 bg-base-300 mt-5">
+      <div className="text-center py-4 bg-orange-100 mt-5">
         <p className="text-sm">
           © {new Date().getFullYear()} <span className="orrange font-bold">Food Lover</span>.  
           All rights reserved.

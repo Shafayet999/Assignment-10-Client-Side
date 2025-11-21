@@ -17,29 +17,37 @@ const Navbar = () => {
             <div className="navbar-start">
                 {/* MOBILE MENU */}
                 <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                    <label tabIndex={0} className="btn btn-ghost w-12 h-10 lg:hidden text-white p-0">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
+                            className="h-5 w-5"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
                         </svg>
                     </label>
+
+
+
 
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-xl z-50 mt-3 w-52 p-3 shadow-lg"
                     >
-                        <li><NavLink to="/home" className="font-semibold orrange">Home</NavLink></li>
-                        <li><NavLink to="/allReviews" className="font-semibold orrange">All Reviews</NavLink></li>
-                        <li><NavLink to="/myReviews" className="font-semibold orrange">My Reviews</NavLink></li>
+                        <li><NavLink onClick={(e) => e.target.blur()} to="/home" className="font-semibold orrange">Home</NavLink></li>
+                        <li><NavLink onClick={(e) => e.target.blur()} to="/allReviews" className="font-semibold orrange">All Reviews</NavLink></li>
+                        <li><NavLink onClick={(e) => e.target.blur()} to="/myReviews" className="font-semibold orrange">My Reviews</NavLink></li>
                         {user && (
                             <>
-                                <li><NavLink to="/addReview" className="font-semibold orrange">Add Review</NavLink></li>
-                                <li><NavLink to="/myFavourites" className="font-semibold orrange">My Favourites</NavLink></li>
+                                <li><NavLink onClick={(e) => e.target.blur()} to="/addReview" className="font-semibold orrange">Add Review</NavLink></li>
+                                <li><NavLink onClick={(e) => e.target.blur()} to="/myFavourites" className="font-semibold orrange">My Favourites</NavLink></li>
                             </>
                         )}
                     </ul>
@@ -50,9 +58,9 @@ const Navbar = () => {
                     <img
                         src={logo}
                         alt="logo"
-                        className="w-16 md:w-20"
+                        className="w-12 md:w-20 ml-3 md:ml-0"
                     />
-                    <span className="text-2xl md:text-4xl font-bold orrange">Food Lover</span>
+                    <span className="text-sm md:text-4xl font-bold orrange">Food Lover</span>
                 </Link>
             </div>
 
@@ -89,9 +97,9 @@ const Navbar = () => {
                             tabIndex={0}
                             className="dropdown-content menu bg-base-100 p-3 shadow-lg rounded-xl w-48 z-50"
                         >
-                            <li><NavLink to="/addReview" className="font-semibold">Add Review</NavLink></li>
-                            <li><NavLink to="/myReviews" className="font-semibold">My Reviews</NavLink></li>
-                            <li><NavLink to="/myFavourites" className="font-semibold">My Favourites</NavLink></li>
+                            <li><NavLink onClick={(e) => e.target.blur()} to="/addReview" className="font-semibold">Add Review</NavLink></li>
+                            <li><NavLink onClick={(e) => e.target.blur()} to="/myReviews" className="font-semibold">My Reviews</NavLink></li>
+                            <li><NavLink onClick={(e) => e.target.blur()} to="/myFavourites" className="font-semibold">My Favourites</NavLink></li>
 
                             <li>
                                 <button onClick={handleSignOut} className="font-semibold text-red-500">

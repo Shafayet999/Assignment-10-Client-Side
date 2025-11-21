@@ -76,7 +76,7 @@ const Home = () => {
 
             {/* TOP REVIEWS */}
             <h1 className="text-center mt-10 font-semibold text-2xl md:text-3xl orrange">
-                ⭐ Top Rated Reviews
+                Top Rated Reviews
             </h1>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-7xl mx-auto px-4 mt-10">
