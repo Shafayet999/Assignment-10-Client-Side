@@ -109,6 +109,7 @@ return (
                 src={i.photo}
                 alt={i.foodName}
                 className="w-full h-full object-cover object-center"
+                referrerPolicy='no-referrer'
             />
         </figure>
 

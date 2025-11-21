@@ -5,23 +5,30 @@ import Loading from "../Components/Loading";
 const MyFavourites = () => {
     const { user, loading } = useContext(AuthContext);
     const [favs, setFavs] = useState([]);
+    const [favLoading, setFavLoading] = useState(true);
 
     useEffect(() => {
         if (!user?.email) return;
 
         fetch(`https://assignment-10-server-side-beta.vercel.app/myFavorites/${user.email}`)
             .then((res) => res.json())
-            .then((data) => setFavs(data))
-            .catch((err) => console.log(err));
+            .then((data) => {
+                setFavs(data);
+                setFavLoading(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                setFavLoading(false);
+            });
     }, [user?.email]);
 
-    if (loading) {
+    if (loading || favLoading) {
         return <Loading />;
     }
     return (
         <div className="max-w-6xl mx-auto mt-10 px-5">
             <h1 className="text-3xl font-semibold orrange text-center mb-10">
-                My Favorites 
+                My Favorites
             </h1>
 
             {favs.length === 0 ? (
