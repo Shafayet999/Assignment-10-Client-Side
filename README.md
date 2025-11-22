@@ -1,16 +1,1 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Food Lover is a full-stack restaurant review platform built with React, Firebase Authentication, Node.js, Express, and MongoDB. The app lets users explore top-rated food reviews, read detailed feedback, post their own reviews, and save favourites for later. It features secure Google and email/password authentication, a fully dynamic navbar with user profile integration, and responsive UI built using Tailwind CSS, DaisyUI, and SwiperJS. Reviews and favourites are stored in MongoDB, with server-side sorting, searching, filtering, and CRUD operations fully implemented. Users can add, edit, delete, and view their personal reviews, and also manage favourites. The entire application is optimized with proper loading states, error handling, and real-time UI updates, making it a smooth, modern, and production-ready food review experience.
